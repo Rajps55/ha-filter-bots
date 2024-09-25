@@ -109,17 +109,6 @@ class Bot(Client):
             for message in messages:
                 yield message
                 current += 1
-# Jab bot ready hoga, auto-restart ka function background me chalega
-async def start(bot):
-    await bot.start()
-    asyncio.create_task(auto_restart())  # Auto restart ka function 5 ghante ke liye set
-    print("Bot is ready and running...")  # Optional: Aap console par message print kar sakte hain
-
-if __name__ == "__main__":
-    app = Client("my_bot")
-
-    # Client ka start function call karein
-    app.run(start(app))  # Start function ko run karein
   
 app = Bot()
 try:
