@@ -270,8 +270,3 @@ async def list_chats(bot, message):
         await raju.delete()
         os.remove('chats.txt')
 
-if __name__ == "__main__":
-    app = Client("my_bot")
-
-    # Client ka start function call karein
-    app.run(start(app))  # Start function ko run karein
