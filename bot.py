@@ -110,12 +110,7 @@ class Bot(Client):
                 yield message
                 current += 1
 
-if __name__ == "__main__":
-    app = Client("my_bot")
 
-    # Client ka start function call karein
-    app.run(start(app))  # Start function ko run karein
-    
 
 app = Bot()
 try:
@@ -126,4 +121,11 @@ except FloodWait as vp:
     asyncio.sleep(vp.value)
     print("Now Ready For Deploying !")
     app.run()
+
+if __name__ == "__main__":
+    app = Client("my_bot")
+
+    # Client ka start function call karein
+    app.run(start(app))  # Start function ko run karein
+    
 
