@@ -71,7 +71,6 @@ async def auto_restart():
     await asyncio.sleep(18000)  # 5 ghante ka wait
     os.execl(sys.executable, sys.executable, "bot.py")  # Restart karega
 
-
 @Client.on_message(filters.command('leave') & filters.user(ADMINS))
 async def leave_a_chat(bot, message):
     if len(message.command) == 1:
