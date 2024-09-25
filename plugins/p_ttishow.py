@@ -36,17 +36,17 @@ async def welcome(bot, message):
             )
             await bot.send_message(chat_id=message.chat.id, text=welcome_msg)
 
-async def schedule_restart(delay_in_seconds):
-    await asyncio.sleep(delay_in_seconds)  # Delay set karega
-    os.execl(sys.executable, sys.executable, "bot.py")  # Restart karega
-
 @Client.on_message(filters.command('restart') & filters.user(ADMINS))
 async def restart_bot(bot, message):
     msg = await message.reply("Restarting...")
     with open('restart.txt', 'w+') as file:
         file.write(f"{msg.chat.id}\n{msg.id}")
     os.execl(sys.executable, sys.executable, "bot.py")
-    
+
+async def schedule_restart(delay_in_seconds):
+    await asyncio.sleep(delay_in_seconds)  # Delay set karega
+    os.execl(sys.executable, sys.executable, "bot.py")  # Restart karega
+     
 # Admin command: /set_restart 2h ya 30m ke liye
 @Client.on_message(filters.command('set_restart') & filters.user(ADMINS))
 async def set_timed_restart(bot, message: Message):
