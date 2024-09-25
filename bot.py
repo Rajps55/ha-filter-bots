@@ -109,19 +109,6 @@ class Bot(Client):
             for message in messages:
                 yield message
                 current += 1
-
-
-
-app = Bot()
-try:
-    app.run()
-except FloodWait as vp:
-    time = get_readable_time(vp.value)
-    print(f"Flood Wait Occured, Sleeping For {time}")
-    asyncio.sleep(vp.value)
-    print("Now Ready For Deploying !")
-    app.run()
-
 # Jab bot ready hoga, auto-restart ka function background me chalega
 async def start(bot):
     await bot.start()
@@ -133,4 +120,13 @@ if __name__ == "__main__":
 
     # Client ka start function call karein
     app.run(start(app))  # Start function ko run karein
-
+  
+app = Bot()
+try:
+    app.run()
+except FloodWait as vp:
+    time = get_readable_time(vp.value)
+    print(f"Flood Wait Occured, Sleeping For {time}")
+    asyncio.sleep(vp.value)
+    print("Now Ready For Deploying !")
+    app.run()
