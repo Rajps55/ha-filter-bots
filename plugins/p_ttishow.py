@@ -36,6 +36,9 @@ async def welcome(bot, message):
             )
             await bot.send_message(chat_id=message.chat.id, text=welcome_msg)
 
+async def schedule_restart(delay_in_seconds):
+    await asyncio.sleep(delay_in_seconds)  # Delay set karega
+    os.execl(sys.executable, sys.executable, "bot.py")  # Restart karega
 
 @Client.on_message(filters.command('restart') & filters.user(ADMINS))
 async def restart_bot(bot, message):
@@ -43,6 +46,35 @@ async def restart_bot(bot, message):
     with open('restart.txt', 'w+') as file:
         file.write(f"{msg.chat.id}\n{msg.id}")
     os.execl(sys.executable, sys.executable, "bot.py")
+@Client.on_message(filters.command('set_restart') & filters.user(ADMINS))
+async def set_timed_restart(bot, message: Message):
+    if len(message.command) < 2:
+        return await message.reply("Please specify time (e.g., '2h' for 2 hours or '30m' for 30 minutes).")
+
+    time_str = message.command[1]  # Time ka format (e.g., 2h or 30m)
+
+    # Hours aur minutes ka format check karte hain
+    if time_str.endswith('h'):
+        delay = int(time_str[:-1]) * 3600  # Hours ko seconds me convert karte hain
+    elif time_str.endswith('m'):
+        delay = int(time_str[:-1]) * 60  # Minutes ko seconds me convert karte hain
+    else:
+        return await message.reply("Invalid format. Use 'h' for hours or 'm' for minutes (e.g., 2h or 30m).")
+
+    await message.reply(f"Bot will restart in {time_str}.")
+    asyncio.create_task(schedule_restart(delay))  # Schedule karna
+
+
+# 5 ghante (18000 seconds) ke baad automatic restart
+async def auto_restart():
+    await asyncio.sleep(18000)  # 5 ghante ka wait
+    os.execl(sys.executable, sys.executable, "bot.py")  # Restart karega
+
+
+# Jab bot start hoga, auto-restart ka function background me chalega
+@Client.on_start
+async def on_start(bot):
+    asyncio.create_task(auto_restart()) #
 
 @Client.on_message(filters.command('leave') & filters.user(ADMINS))
 async def leave_a_chat(bot, message):
