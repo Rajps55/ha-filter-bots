@@ -43,7 +43,7 @@ async def restart_bot(bot, message):
         file.write(f"{msg.chat.id}\n{msg.id}")
     os.execl(sys.executable, sys.executable, "bot.py")
 
-async def schedule_restart(delay_in_seconds):
+"""async def schedule_restart(delay_in_seconds):
     await asyncio.sleep(delay_in_seconds)  # Delay set karega
     os.execl(sys.executable, sys.executable, "bot.py")  # Restart karega
      
@@ -74,7 +74,7 @@ async def auto_restart():
 async def start(bot):
     await bot.start()
     asyncio.create_task(auto_restart())  # Auto restart ka function 5 ghante ke liye set
-    print("Bot is ready and running...")  # Optional: Aap console par message print kar sakte hain
+    print("Bot is ready and running...")  # Optional: Aap console par message print kar sakte hain"""
 
 @Client.on_message(filters.command('leave') & filters.user(ADMINS))
 async def leave_a_chat(bot, message):
