@@ -17,8 +17,8 @@ async def media_watch(message_id):
     src = urllib.parse.urljoin(URL, f'download/{message_id}')
     tag = mime_type.split('/')[0].strip()
     if tag == 'video':
-        async with aiofiles.open('web/template/watch.html') as r:
-            heading = 'Watch - {}'.format(file_name)
+        async with aiofiles.open('web/template/req.html') as r:
+            heading = 'req - {}'.format(file_name)
             html = (await r.read()).replace('tag', tag) % (heading, file_name, src)
     else:
         html = '<h1>This is not streamable file</h1>'
