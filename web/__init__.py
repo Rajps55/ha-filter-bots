@@ -1,7 +1,7 @@
-# __init__.py
+# Credit - @CoderRzps
 
 from aiohttp import web
-#from web.stream_routes import routes
+from web.stream_routes import routes
 
 
 web_app = web.Application()
