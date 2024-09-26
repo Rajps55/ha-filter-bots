@@ -1,4 +1,3 @@
-#stream_routes.py
 import time
 import math
 import logging
@@ -18,7 +17,7 @@ async def root_route_handler(request):
     return web.Response(text='<h1 align="center"><a href="https://t.me/HA_Bots"><b>HA Bots</b></a></h1>', content_type='text/html')
 
 
-@routes.get("/req/{message_id}")
+@routes.get("/watch/{message_id}")
 async def watch_handler(request):
     try:
         message_id = int(request.match_info['message_id'])
@@ -79,5 +78,3 @@ async def media_download(request, message_id: int):
         return_resp.headers.add("Content-Length", str(file_size))
 
     return return_resp
-
-
