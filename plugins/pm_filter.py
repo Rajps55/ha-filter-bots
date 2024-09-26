@@ -571,13 +571,8 @@ async def cb_handler(client: Client, query: CallbackQuery):
             btn.append(
                 [InlineKeyboardButton("🔁 Try Again 🔁", callback_data=f"checksub#{mc}")]
             )
-            try :
-                await query.edit_message_reply_markup(reply_markup=InlineKeyboardMarkup(btn))
-        except MessageNotModified:
-            pass
-
-        return 
-        
+            await query.edit_message_reply_markup(reply_markup=InlineKeyboardMarkup(btn))
+            return
         await query.answer(url=f"https://t.me/{temp.U_NAME}?start={mc}")
         await query.message.delete()
 
