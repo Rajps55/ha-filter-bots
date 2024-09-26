@@ -583,7 +583,6 @@ async def cb_handler(client: Client, query: CallbackQuery):
     await query.answer(url=f"https://t.me/{temp.U_NAME}?start={mc}")
     await query.message.delete()
 
-
     elif query.data.startswith("unmuteme"):
         ident, userid = query.data.split("#")
         user_id = query.from_user.id
