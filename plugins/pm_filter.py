@@ -571,9 +571,9 @@ async def cb_handler(client: Client, query: CallbackQuery):
             btn.append(
                 [InlineKeyboardButton("🔁 Try Again 🔁", callback_data=f"checksub#{mc}")]
             )
-                await safe_edit_message(query, InlineKeyboardMarkup(btn))
+            await safe_edit_message(query, InlineKeyboardMarkup(btn))
              
-                return
+            return
             
         await query.answer(url=f"https://t.me/{temp.U_NAME}?start={mc}")
         await query.message.delete()
