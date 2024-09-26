@@ -4,7 +4,7 @@ import re
 from time import time as time_now
 import ast
 import math
-from pyrogram.errors.exceptions.bad_request_400 import MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty, MessageNotModified
+from pyrogram.errors.exceptions.bad_request_400 import MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty
 from Script import script
 from datetime import datetime, timedelta
 import pyrogram
@@ -563,25 +563,23 @@ async def cb_handler(client: Client, query: CallbackQuery):
             return
                 
     elif query.data.startswith("checksub"):
-    ident, mc = query.data.split("#")
-    settings = await get_settings(int(mc.split("_", 2)[1]))
-    btn = await is_subscribed(client, query, settings['fsub'])
-    
-    if btn:
-        await query.answer(f"Hello {query.from_user.first_name},\nPlease join my updates channel and try again.", show_alert=True)
-        btn.append(
-            [InlineKeyboardButton("🔁 Try Again 🔁", callback_data=f"checksub#{mc}")]
-        )
-        
-        try:
-            await query.edit_message_reply_markup(reply_markup=InlineKeyboardMarkup(btn))
+        ident, mc = query.data.split("#")
+        settings = await get_settings(int(mc.split("_", 2)[1]))
+        btn = await is_subscribed(client, query, settings['fsub'])
+        if btn:
+            await query.answer(f"Hello {query.from_user.first_name},\nPlease join my updates channel and try again.", show_alert=True)
+            btn.append(
+                [InlineKeyboardButton("🔁 Try Again 🔁", callback_data=f"checksub#{mc}")]
+            )
+            try :
+                await query.edit_message_reply_markup(reply_markup=InlineKeyboardMarkup(btn))
         except MessageNotModified:
-            pass  # Yeh error ko ignore karega agar message already updated hai
+            pass
+
+        return 
         
-        return
-    
-    await query.answer(url=f"https://t.me/{temp.U_NAME}?start={mc}")
-    await query.message.delete()
+        await query.answer(url=f"https://t.me/{temp.U_NAME}?start={mc}")
+        await query.message.delete()
 
     elif query.data.startswith("unmuteme"):
         ident, userid = query.data.split("#")
