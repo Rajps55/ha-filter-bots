@@ -4,7 +4,7 @@ import re
 from time import time as time_now
 import ast
 import math
-from pyrogram.errors.exceptions.bad_request_400 import MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty, MessageNotModified
+from pyrogram.errors.exceptions.bad_request_400 import MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty
 from Script import script
 from datetime import datetime, timedelta
 import pyrogram
@@ -571,11 +571,10 @@ async def cb_handler(client: Client, query: CallbackQuery):
             btn.append(
                 [InlineKeyboardButton("🔁 Try Again 🔁", callback_data=f"checksub#{mc}")]
             )
-            try:
-                await query.edit_message_reply_markup(reply_markup=InlineKeyboardMarkup(btn))
-            except messageNotModifide :
-                pass
-            return
+                await safe_edit_message(query, InlineKeyboardMarkup(btn))
+             
+                return
+            
         await query.answer(url=f"https://t.me/{temp.U_NAME}?start={mc}")
         await query.message.delete()
 
