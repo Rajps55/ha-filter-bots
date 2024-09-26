@@ -43,38 +43,7 @@ async def restart_bot(bot, message):
         file.write(f"{msg.chat.id}\n{msg.id}")
     os.execl(sys.executable, sys.executable, "bot.py")
 
-"""async def schedule_restart(delay_in_seconds):
-    await asyncio.sleep(delay_in_seconds)  # Delay set karega
-    os.execl(sys.executable, sys.executable, "bot.py")  # Restart karega
-     
-# Admin command: /set_restart 2h ya 30m ke liye
-@Client.on_message(filters.command('set_restart') & filters.user(ADMINS))
-async def set_timed_restart(bot, message: Message):
-    if len(message.command) < 2:
-        return await message.reply("Please specify time (e.g., '2h' for 2 hours or '30m' for 30 minutes).")
 
-    time_str = message.command[1]  # Time ka format (e.g., 2h or 30m)
-
-    # Hours aur minutes ka format check karte hain
-    if time_str.endswith('h'):
-        delay = int(time_str[:-1]) * 3600  # Hours ko seconds me convert karte hain
-    elif time_str.endswith('m'):
-        delay = int(time_str[:-1]) * 60  # Minutes ko seconds me convert karte hain
-    else:
-        return await message.reply("Invalid format. Use 'h' for hours or 'm' for minutes (e.g., 2h or 30m).")
-
-    await message.reply(f"Bot will restart in {time_str}.")
-    asyncio.create_task(schedule_restart(delay))  # Schedule karna
-
-# 5 ghante (18000 seconds) ke baad automatic restart
-async def auto_restart():
-    await asyncio.sleep(18000)  # 5 ghante ka wait
-    os.execl(sys.executable, sys.executable, "bot.py")  # Restart karega
-# Jab bot ready hoga, auto-restart ka function background me chalega
-async def start(bot):
-    await bot.start()
-    asyncio.create_task(auto_restart())  # Auto restart ka function 5 ghante ke liye set
-    print("Bot is ready and running...")  # Optional: Aap console par message print kar sakte hain"""
 
 @Client.on_message(filters.command('leave') & filters.user(ADMINS))
 async def leave_a_chat(bot, message):
