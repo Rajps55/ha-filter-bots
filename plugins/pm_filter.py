@@ -4,7 +4,7 @@ import re
 from time import time as time_now
 import ast
 import math
-from pyrogram.errors.exceptions.bad_request_400 import MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty, 
+from pyrogram.errors.exceptions.bad_request_400 import MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty, MessageNotModified
 from Script import script
 from datetime import datetime, timedelta
 import pyrogram
