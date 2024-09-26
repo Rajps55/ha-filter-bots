@@ -1,5 +1,4 @@
 #stream_routes.py
-"""
 import time
 import math
 import logging
@@ -80,4 +79,4 @@ async def media_download(request, message_id: int):
         return_resp.headers.add("Content-Length", str(file_size))
 
     return return_resp
-"""
+
