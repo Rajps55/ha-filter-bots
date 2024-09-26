@@ -576,8 +576,8 @@ async def cb_handler(client: Client, query: CallbackQuery):
         try:
             await query.edit_message_reply_markup(reply_markup=InlineKeyboardMarkup(btn))
         except MessageNotModified:
-            pass  # Error ko ignore kar diya jaega, agar message edit nahi hota
-
+            pass  # Yeh error ko ignore karega agar message already updated hai
+        
         return
     
     await query.answer(url=f"https://t.me/{temp.U_NAME}?start={mc}")
