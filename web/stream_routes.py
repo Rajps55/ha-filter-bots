@@ -1,4 +1,4 @@
-#stream_routes.py
+"""#stream_routes.py
 import time
 import math
 import logging
@@ -80,3 +80,4 @@ async def media_download(request, message_id: int):
 
     return return_resp
 
+"""
